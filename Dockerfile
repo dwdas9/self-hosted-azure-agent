@@ -65,7 +65,7 @@ RUN curl -o vsts-agent-linux-x64-${AGENT_VERSION}.tar.gz -L https://vstsagentpac
 RUN sudo ./bin/installdependencies.sh
 
 # Copy entrypoint script
-COPY --chown=azureagent:azureagent entrypoint-azdo.sh /home/azureagent/entrypoint.sh
+COPY --chown=azureagent:azureagent entrypoint.sh /home/azureagent/entrypoint.sh
 RUN chmod +x /home/azureagent/entrypoint.sh
 
 # Set environment variables
