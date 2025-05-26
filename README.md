@@ -5,7 +5,7 @@
 ![PowerShell](https://img.shields.io/badge/PowerShell-%235391FE.svg?style=flat&logo=powershell&logoColor=white)
 ![Bash](https://img.shields.io/badge/bash-%23121011.svg?style=flat&logo=gnu-bash&logoColor=white)
 
-The easiest way to set up an Azure DevOps self-hosted agent using Docker. Just clone, run, and enter your PAT!
+The easiest way to create a Ubuntu-based, Docker Container which will be your self-hosted Azure DevOps agent. Just clone, run, and enter your PAT.
 
 ## 🚀 Quick Start
 
