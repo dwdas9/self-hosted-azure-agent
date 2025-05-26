@@ -7,6 +7,26 @@
 
 The easiest way to create a Ubuntu-based, Docker Container which will be your self-hosted Azure DevOps agent. Just clone, run, and enter your PAT.
 
+- [Azure DevOps Self-Hosted Agent](#azure-devops-self-hosted-agent)
+  - [🚀 Quick Start](#-quick-start)
+    - [What You Need](#what-you-need)
+      - [How to Create a PAT](#how-to-create-a-pat)
+    - [For Windows:](#for-windows)
+    - [For Linux/Mac:](#for-linuxmac)
+  - [Managing Your Agent](#managing-your-agent)
+    - [Windows:](#windows)
+    - [Linux/Mac:](#linuxmac)
+  - [Features](#features)
+  - [Manual Setup (if you prefer)](#manual-setup-if-you-prefer)
+  - [Environment Variables](#environment-variables)
+  - [Useful Commands](#useful-commands)
+  - [Repository Structure](#repository-structure)
+  - [Troubleshooting](#troubleshooting)
+  - [Contributing](#contributing)
+  - [License](#license)
+  - [Support](#support)
+
+
 ## 🚀 Quick Start
 
 ### What You Need
