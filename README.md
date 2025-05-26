@@ -9,11 +9,30 @@ The easiest way to set up an Azure DevOps self-hosted agent using Docker. Just c
 
 ## 🚀 Quick Start
 
+### What You Need
+
+- Docker installed on your machine **and started**
+- An Azure DevOps Personal Access Token (PAT) with **Agent Pools (read, manage)** permissions
+
+#### How to Create a PAT
+
+1. From Azure DevOps organization → user settings → **Personal Access Tokens**
+  ![](images/20250526150055.png)
+
+2. Click **+ New Token**
+  ![](images/20250526150710.png)
+
+3. Give it a name (e.g., "Self-hosted Agent"), Select **Agent Pools (read, manage)** permissions, Click **Create**
+  ![](images/20250526151425.png)
+
+4. Copy the token (you won't see it again!)
+  ![](images/20250526151622.png)
+
 ### For Windows:
 
 **Option 1: PowerShell**
 ```powershell
-git clone https://github.com/your-username/self-hosted-azure-agent.git
+git clone https://github.com/dwdas9/self-hosted-azure-agent.git
 cd self-hosted-azure-agent
 .\setup-agent.ps1
 ```
@@ -24,29 +43,21 @@ cd self-hosted-azure-agent
 3. Follow the prompts
 
 ### For Linux/Mac:
+
+1. Clone the repo and CD to it using terminal
+2. Run the following commands
 ```bash
-git clone https://github.com/your-username/self-hosted-azure-agent.git
-cd self-hosted-azure-agent
 chmod +x install.sh
 ./install.sh
 ```
+3. The command will create the docker image
+![](images/20250526160311.png)
+4. You should be able to see a container running in Docker Desktop Container section
+![](images/20250526160357.png)
+5. From Organizational settings, Agent Pools, Agents the agent should be running
+![](images/20250526160612.png)
 
-**That's it! 🎉** Just enter your organization URL and PAT when prompted, and your agent will be running within minutes.
-
-## What You Need
-
-- Docker installed on your machine
-- An Azure DevOps Personal Access Token (PAT) with **Agent Pools (read, manage)** permissions
-
-## How to Create a PAT
-
-1. Go to your Azure DevOps organization
-2. Click on your profile picture → **Personal Access Tokens**
-3. Click **+ New Token**
-4. Give it a name (e.g., "Self-hosted Agent")
-5. Select **Agent Pools (read, manage)** permissions
-6. Click **Create**
-7. Copy the token (you won't see it again!)
+**That's it! 🎉**
 
 ## Managing Your Agent
 
