@@ -1,5 +1,9 @@
 # Azure DevOps Self-Hosted Agent on Ubuntu
-FROM ubuntu:22.04
+FROM --platform=$TARGETPLATFORM ubuntu:22.04
+
+# Set ARG for platform detection
+ARG TARGETPLATFORM
+ARG BUILDPLATFORM
 
 # Avoid prompts from apt
 ENV DEBIAN_FRONTEND=noninteractive
@@ -57,9 +61,19 @@ WORKDIR /home/azureagent
 
 # Download and extract Azure DevOps agent
 ARG AGENT_VERSION="3.232.3"
-RUN curl -o vsts-agent-linux-x64-${AGENT_VERSION}.tar.gz -L https://vstsagentpackage.azureedge.net/agent/${AGENT_VERSION}/vsts-agent-linux-x64-${AGENT_VERSION}.tar.gz \
-    && tar xzf vsts-agent-linux-x64-${AGENT_VERSION}.tar.gz \
-    && rm vsts-agent-linux-x64-${AGENT_VERSION}.tar.gz
+ARG TARGETARCH="x64"
+
+# Download ARM64 agent if running on ARM architecture
+RUN ARCH=$(uname -m) && \
+    if [ "$ARCH" = "aarch64" ] || [ "$ARCH" = "arm64" ]; then \
+        echo "Detected ARM64 architecture, downloading ARM64 agent" && \
+        TARGETARCH="arm64"; \
+    else \
+        echo "Using x64 agent"; \
+    fi && \
+    curl -o vsts-agent-linux-${TARGETARCH}-${AGENT_VERSION}.tar.gz -L https://vstsagentpackage.azureedge.net/agent/${AGENT_VERSION}/vsts-agent-linux-${TARGETARCH}-${AGENT_VERSION}.tar.gz \
+    && tar xzf vsts-agent-linux-${TARGETARCH}-${AGENT_VERSION}.tar.gz \
+    && rm vsts-agent-linux-${TARGETARCH}-${AGENT_VERSION}.tar.gz
 
 # Install agent dependencies
 RUN sudo ./bin/installdependencies.sh
