@@ -90,7 +90,17 @@ if [[ ! -f "Dockerfile" ]]; then
 fi
 
 # Build the Docker image
-if ! docker build -t azdo-agent .; then
+echo -e "\033[93mDetecting system architecture...\033[0m"
+ARCH=$(uname -m)
+if [[ "$ARCH" == "arm64" ]]; then
+    echo -e "\033[93mDetected Apple Silicon (ARM64). Building compatible image...\033[0m"
+    PLATFORM_FLAG="--platform linux/arm64"
+else
+    echo -e "\033[93mDetected x86_64 architecture. Building standard image...\033[0m"
+    PLATFORM_FLAG=""
+fi
+
+if ! docker build $PLATFORM_FLAG -t azdo-agent .; then
     echo -e "\033[91m✗ Failed to build Docker image!\033[0m"
     exit 1
 fi
@@ -115,6 +125,7 @@ if ! docker run -d --name azdo-agent \
     -e AZP_AGENT_NAME="$AZP_AGENT_NAME" \
     -e AZP_POOL="$AZP_POOL" \
     --restart unless-stopped \
+    $PLATFORM_FLAG \
     azdo-agent; then
     echo -e "\033[91m✗ Failed to start container!\033[0m"
     exit 1
